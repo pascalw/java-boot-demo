@@ -1,6 +1,7 @@
 package nl.kabisa.service.booking;
 
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 
 import nl.kabisa.service.rating.Rate;
 
@@ -8,8 +9,8 @@ public class Booking {
     public final long id;
     public final Rate rate;
 
-    public Booking(long id, Rate rate) {
-        this.id = id;
+    public Booking(Rate rate) {
+        this.id = ThreadLocalRandom.current().nextInt(0, 1000);
         this.rate = rate;
     }
 

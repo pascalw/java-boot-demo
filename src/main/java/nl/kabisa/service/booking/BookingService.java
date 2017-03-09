@@ -1,6 +1,7 @@
 package nl.kabisa.service.booking;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 import nl.kabisa.service.rating.Rate;
 import nl.kabisa.service.rating.RateProvider;
@@ -14,20 +15,20 @@ public class BookingService {
     }
 
     public BookingService(RateProvider... rateProviders) {
-        this.rateProviders = Arrays.asList(rateProviders);
+        this(Arrays.asList(rateProviders));
     }
 
     public Result<Booking, BookingException> book(Shipment shipment) {
         return bookShipment(shipment);
     }
 
-    public Booking book2(Shipment shipment) {
+    public Booking book2(Shipment shipment) throws BookingException {
         return bookShipment(shipment).unwrap();
     }
 
     private Result<Booking, BookingException> bookShipment(Shipment shipment) {
         return cheapestRate(shipment)
-                .map(rate -> Result.<Booking, BookingException> ok(new Booking(new Random().nextLong(), rate)))
+                .map(rate -> Result.<Booking, BookingException> ok(new Booking(rate)))
                 .orElse(Result.err(new BookingException.NoRatesFoundException()));
     }
 
