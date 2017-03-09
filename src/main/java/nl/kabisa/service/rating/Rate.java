@@ -1,14 +1,24 @@
 package nl.kabisa.service.rating;
 
-import java.util.Comparator;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import nl.kabisa.service.booking.Shipment;
 
 public class Rate {
     public final long value;
 
     public static Rate random() {
         return new Rate(ThreadLocalRandom.current().nextLong(1, 100));
+    }
+
+    public static List<Rate> fakeRatesFor(Shipment shipment) {
+        if (shipment.customerReference.equals("fail"))
+            return Collections.emptyList();
+        else
+            return IntStream.range(0, 3).mapToObj(i -> Rate.random()).collect(Collectors.toList());
     }
 
     public static Comparator<Rate> cheapest() {

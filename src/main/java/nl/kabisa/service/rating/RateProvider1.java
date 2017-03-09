@@ -1,6 +1,6 @@
 package nl.kabisa.service.rating;
 
-import static nl.kabisa.service.rating.RatingUtil.fakeRatesFor;
+import static nl.kabisa.service.rating.Rate.fakeRatesFor;
 
 import java.util.List;
 
