@@ -27,3 +27,6 @@ Icon
 
 ### Maven ###
 target/
+
+### Misc ###
+.env
