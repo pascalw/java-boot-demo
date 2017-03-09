@@ -32,7 +32,7 @@ public class Result<T, E extends Exception> {
         return exception != null;
     }
 
-    public <U> Result<U, E> map(Function<? super T, ? extends U> mapper) {
+    public <U> Result<U, E> map(Function<T, U> mapper) {
         if (isErr())
             return new Result<>(exception);
         else
@@ -42,7 +42,7 @@ public class Result<T, E extends Exception> {
     public T unwrap() throws E {
         if (isErr())
             throw exception;
-        else
-            return result;
+
+        return result;
     }
 }
