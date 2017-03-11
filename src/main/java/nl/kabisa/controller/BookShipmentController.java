@@ -7,12 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import nl.kabisa.service.booking.*;
 
 @RestController
-public class BookShipmentController {
+public class BookShipmentController extends ApplicationController {
 
     private final BookingService bookingService;
 
@@ -27,16 +25,8 @@ public class BookShipmentController {
     }
 
     @ExceptionHandler(BookingException.NoRatesFoundException.class)
-    public ResponseEntity<Error> handleNoRatesFound() {
-        return new ResponseEntity<>(new Error("No rates found"), HttpStatus.CONFLICT);
+    public ResponseEntity<ErrorResponse> handleNoRatesFound() {
+        return new ResponseEntity<>(new ErrorResponse("No rates found"), HttpStatus.CONFLICT);
     }
 
-    private static class Error {
-        @JsonProperty("error")
-        public final String message;
-
-        private Error(String message) {
-            this.message = message;
-        }
-    }
 }
