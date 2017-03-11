@@ -14,21 +14,21 @@ public class Shipment {
     public final String customerReference;
 
     @NotNull
-    public final int height;
+    public final Integer height;
 
     @NotNull
-    public final int weight;
+    public final Integer weight;
 
     @NotNull
-    public final int length;
+    public final Integer length;
 
     public final String description;
 
     @JsonCreator
     public Shipment(@JsonProperty("customerReference") String customerReference,
-            @JsonProperty("height") int height,
-            @JsonProperty("weight") int weight,
-            @JsonProperty("length") int length,
+            @JsonProperty("height") Integer height,
+            @JsonProperty("weight") Integer weight,
+            @JsonProperty("length") Integer length,
             @JsonProperty("description") String description) {
         this.customerReference = customerReference;
         this.height = height;
@@ -44,10 +44,10 @@ public class Shipment {
         if (o == null || getClass() != o.getClass())
             return false;
         Shipment shipment = (Shipment) o;
-        return height == shipment.height &&
-               weight == shipment.weight &&
-               length == shipment.length &&
-               Objects.equals(customerReference, shipment.customerReference) &&
+        return Objects.equals(customerReference, shipment.customerReference) &&
+               Objects.equals(height, shipment.height) &&
+               Objects.equals(weight, shipment.weight) &&
+               Objects.equals(length, shipment.length) &&
                Objects.equals(description, shipment.description);
     }
 
