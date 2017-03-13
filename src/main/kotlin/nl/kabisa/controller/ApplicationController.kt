@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseBody
 import java.util.stream.Collectors
 
-open class ApplicationController {
+abstract class ApplicationController {
     @ExceptionHandler(MethodArgumentNotValidException::class)
     @ResponseBody
     fun handleValidationException(e: MethodArgumentNotValidException): ResponseEntity<ErrorResponse> {
@@ -19,7 +19,6 @@ open class ApplicationController {
         return ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST)
     }
 
-    class ErrorResponse @JvmOverloads constructor(val message: String, val errors: List<Error> = emptyList<Error>())
-
+    class ErrorResponse constructor(val message: String, val errors: List<Error> = emptyList<Error>())
     class Error(val field: String, val message: String)
 }

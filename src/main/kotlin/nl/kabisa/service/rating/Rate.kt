@@ -9,10 +9,6 @@ import java.util.stream.IntStream
 data class Rate(val value: Long) {
     companion object {
 
-        fun random(): Rate {
-            return Rate(ThreadLocalRandom.current().nextLong(1, 100))
-        }
-
         fun fakeRatesFor(shipment: Shipment): List<Rate> {
             if (shipment.customerReference == "fail")
                 return emptyList()
@@ -20,8 +16,8 @@ data class Rate(val value: Long) {
                 return IntStream.range(0, 3).mapToObj { _ -> Rate.random() }.collect(Collectors.toList<Rate>())
         }
 
-        fun cheapest(): Comparator<Rate> {
-            return kotlin.Comparator { o1, o2 -> o1.value.compareTo(o2.value) }
-        }
+        fun random(): Rate = Rate(ThreadLocalRandom.current().nextLong(1, 100))
+
+        fun cheapest(): Comparator<Rate> = kotlin.Comparator { (val1), (val2) -> val1.compareTo(val2) }
     }
 }
