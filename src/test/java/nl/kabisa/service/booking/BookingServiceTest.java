@@ -12,10 +12,10 @@ import nl.kabisa.service.rating.RateProvider;
 import nl.kabisa.util.Result;
 
 public class BookingServiceTest {
-    private static final Rate CHEAPEST_RATE = new Rate(1);
+    private static final Rate CHEAPEST_RATE = new Rate(1, "cheap");
 
     private final RateProvider cheapProvider = shipment -> ImmutableList.of(CHEAPEST_RATE);
-    private final RateProvider expensiveProvider = shipment -> ImmutableList.of(new Rate(100));
+    private final RateProvider expensiveProvider = shipment -> ImmutableList.of(new Rate(100, "expensive"));
 
     private final BookingService bookingService = new BookingService(cheapProvider, expensiveProvider);
     private final Shipment shipment = new Shipment("ref", 100, 10, 20, "Amaze balls!");

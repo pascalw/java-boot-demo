@@ -8,14 +8,16 @@ import nl.kabisa.service.booking.Shipment;
 
 public class RandomRateProvider implements RateProvider {
 
+    private final String id;
     private final String apiHost;
 
-    public RandomRateProvider(String apiHost) {
+    public RandomRateProvider(String id, String apiHost) {
+        this.id = id;
         this.apiHost = apiHost;
     }
 
     @Override
     public List<Rate> getRates(Shipment shipment) {
-        return randomRatesFor(shipment);
+        return randomRatesFor(shipment, id);
     }
 }

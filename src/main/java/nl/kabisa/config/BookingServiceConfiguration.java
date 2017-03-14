@@ -21,12 +21,12 @@ public class BookingServiceConfiguration {
     public static class RealRateProviders {
         @Bean
         public RandomRateProvider rateProvider1(Environment environment) {
-            return new RandomRateProvider(environment.getRequiredProperty("rate.provider1.api.host"));
+            return new RandomRateProvider("provider1", environment.getRequiredProperty("rate.provider1.api.host"));
         }
 
         @Bean
         public RandomRateProvider rateProvider2(Environment environment) {
-            return new RandomRateProvider(environment.getRequiredProperty("rate.provider2.api.host"));
+            return new RandomRateProvider("provider2", environment.getRequiredProperty("rate.provider2.api.host"));
         }
     }
 
@@ -35,7 +35,7 @@ public class BookingServiceConfiguration {
     public static class MockRateProviders {
         @Bean
         public RateProvider mockRateProvider() {
-            return shipment -> ImmutableList.of(Rate.random());
+            return shipment -> ImmutableList.of(Rate.random("random"));
         }
     }
 
