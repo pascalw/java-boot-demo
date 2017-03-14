@@ -1,7 +1,6 @@
 package nl.kabisa.service.booking;
 
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 
 import nl.kabisa.service.rating.Rate;
 import nl.kabisa.service.rating.RateProvider;

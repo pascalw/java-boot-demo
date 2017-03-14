@@ -5,6 +5,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import com.google.common.base.MoreObjects;
+
 import nl.kabisa.service.booking.Shipment;
 
 public class Rate {
@@ -42,5 +44,11 @@ public class Rate {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("value", value)
+                .toString();
     }
 }
