@@ -16,7 +16,7 @@ public class Rate {
         return new Rate(ThreadLocalRandom.current().nextLong(1, 100));
     }
 
-    public static List<Rate> fakeRatesFor(Shipment shipment) {
+    public static List<Rate> randomRatesFor(Shipment shipment) {
         if (shipment.customerReference.equals("fail"))
             return Collections.emptyList();
         else

@@ -20,13 +20,13 @@ public class BookingServiceConfiguration {
     @ConditionalOnMissingBean(MockRateProviders.class)
     public static class RealRateProviders {
         @Bean
-        public RateProvider1 rateProvider1(Environment environment) {
-            return new RateProvider1(environment.getRequiredProperty("rate.provider1.api.host"));
+        public RandomRateProvider rateProvider1(Environment environment) {
+            return new RandomRateProvider(environment.getRequiredProperty("rate.provider1.api.host"));
         }
 
         @Bean
-        public RateProvider2 rateProvider2(Environment environment) {
-            return new RateProvider2(environment.getRequiredProperty("rate.provider2.api.host"));
+        public RandomRateProvider rateProvider2(Environment environment) {
+            return new RandomRateProvider(environment.getRequiredProperty("rate.provider2.api.host"));
         }
     }
 

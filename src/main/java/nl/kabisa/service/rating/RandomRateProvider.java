@@ -1,20 +1,21 @@
 package nl.kabisa.service.rating;
 
-import static nl.kabisa.service.rating.Rate.fakeRatesFor;
+import static nl.kabisa.service.rating.Rate.randomRatesFor;
 
 import java.util.List;
 
 import nl.kabisa.service.booking.Shipment;
 
-public class RateProvider2 implements RateProvider {
+public class RandomRateProvider implements RateProvider {
+
     private final String apiHost;
 
-    public RateProvider2(String apiHost) {
+    public RandomRateProvider(String apiHost) {
         this.apiHost = apiHost;
     }
 
     @Override
     public List<Rate> getRates(Shipment shipment) {
-        return fakeRatesFor(shipment);
+        return randomRatesFor(shipment);
     }
 }
