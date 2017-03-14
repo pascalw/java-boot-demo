@@ -2,14 +2,13 @@ package nl.kabisa.service.booking
 
 import nl.kabisa.service.rating.Rate
 import nl.kabisa.service.rating.RateProvider
-import nl.kabisa.util.Result
 import java.util.*
 
 class BookingService(private val rateProviders: List<RateProvider>) {
 
     constructor(vararg rateProviders: RateProvider) : this(Arrays.asList(*rateProviders))
 
-    fun book(shipment: Shipment): Result<Booking, BookingException> {
+    fun book(shipment: Shipment): BookingResult {
         return bookShipment(shipment)
     }
 
@@ -18,12 +17,12 @@ class BookingService(private val rateProviders: List<RateProvider>) {
         return bookShipment(shipment).unwrap()
     }
 
-    private fun bookShipment(shipment: Shipment): Result<Booking, BookingException> {
+    private fun bookShipment(shipment: Shipment): BookingResult {
         val cheapestRate = cheapestRate(shipment)
 
         return when (cheapestRate) {
-            null -> Result.err<Booking, BookingException>(BookingException.NoRatesFoundException())
-            else -> Result.ok<Booking, BookingException>(Booking(cheapestRate))
+            null -> BookingResult.err(BookingException.NoRatesFoundException())
+            else -> BookingResult.ok(Booking(cheapestRate))
         }
     }
 
